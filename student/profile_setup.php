@@ -40,9 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="date" name="dob" required />
 
         <div>
-            <label><input type="radio" name="gender" value="M" required> Male</label>
-            <label><input type="radio" name="gender" value="F" required> Female</label>
-            <label><input type="radio" name="gender" value="O" required> Other</label>
+            <label><input type="radio" name="gender" value="Male" required> Male</label>
+            <label><input type="radio" name="gender" value="Female" required> Female</label>
+            <label><input type="radio" name="gender" value="Other" required> Other</label>
         </div>
 
         <textarea name="address" placeholder="Address" required></textarea>
