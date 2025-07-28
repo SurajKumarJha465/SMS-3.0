@@ -14,7 +14,8 @@ $query->bind_param("i", $user_id);
 $query->execute();
 $result = $query->get_result();
 $student = $result->fetch_assoc();
-$full_name = $student['first_name'] . ' ' . $student['last_name'];
+
+$full_name = ($student) ? $student['first_name'] . ' ' . $student['last_name'] : 'Student';
 ?>
 
 <!DOCTYPE html>

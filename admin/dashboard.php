@@ -9,12 +9,13 @@ include("../db.php");
 
 // Fetch admin name using user_id
 $user_id = $_SESSION["user_id"];
-$query = $conn->prepare("SELECT first_name, last_name FROM students WHERE user_id = ?");
+$query = $conn->prepare("SELECT first_name, last_name FROM admins WHERE user_id = ?");
 $query->bind_param("i", $user_id);
 $query->execute();
 $result = $query->get_result();
 $admin = $result->fetch_assoc();
-$full_name = $admin['first_name'] . ' ' . $admin['last_name'];
+
+$full_name = ($admin) ? $admin['first_name'] . ' ' . $admin['last_name'] : 'Admin';
 ?>
 
 <!DOCTYPE html>
