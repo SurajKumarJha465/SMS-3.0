@@ -19,6 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif (password_verify($password, $user["password"])) {
             $_SESSION["user_id"] = $user["user_id"];
             $_SESSION["role_id"] = $user["role_id"];
+            $_SESSION["is_approved"] = $user["is_approved"];
+
 
             switch ($user["role_id"]) {
                 case 1: // Admin
@@ -39,13 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     break;
 
                 case 3: // Student
-                    // Check if profile is incomplete
-                    $check = $conn->prepare("SELECT first_name, dob FROM students WHERE user_id = ?");
+                    $check = $conn->prepare("SELECT student_id, first_name, dob FROM students WHERE user_id = ?");
                     $check->bind_param("i", $user["user_id"]);
                     $check->execute();
                     $res = $check->get_result();
                     $student = $res->fetch_assoc();
 
+                    $_SESSION["student_id"] = $student['student_id'];
                     if (empty($student['first_name']) || empty($student['dob'])) {
                         header("Location: student/profile_setup.php");
                     } else {
